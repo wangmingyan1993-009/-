@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>租客流向看板 - 演示版</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #f8f9fa;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 租客流向看板</h1>
+    <p>演示数据（不依赖外部文件）</p>
+    
+    <div class="stats">
+        <div class="stat-card">
+            <div>本月到期租客</div>
+            <div class="stat-number">28</div>
+        </div>
+        <div class="stat-card">
+            <div>续租率</div>
+            <div class="stat-number">67.8%</div>
+        </div>
+        <div class="stat-card">
+            <div>流失率</div>
+            <div class="stat-number">32.2%</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>📋 流失原因统计</h3>
+        <table>
+            <thead>
+                <tr><th>流失原因</th><th>人数</th><th>占比</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>租金过高</td><td>45</td><td>28.5%</td></tr>
+                <tr><td>服务体验差</td><td>32</td><td>20.3%</td></tr>
+                <tr><td>工作变动</td><td>28</td><td>17.7%</td></tr>
+                <tr><td>房屋质量问题</td><td>24</td><td>15.2%</td></tr>
+                <tr><td>换租其他房源</td><td>18</td><td>11.4%</td></tr>
+                <tr><td>其他</td><td>11</td><td>6.9%</td></tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
