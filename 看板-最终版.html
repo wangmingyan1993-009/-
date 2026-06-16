@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>租客流向看板</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+</script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Arial, sans-serif; padding:20px; background:#f0f2f5; }
+h1 { text-align:center; margin-bottom:10px; color:#1a1a2e; }
+.subtitle { text-align:center; color:#888; font-size:14px; margin-bottom:30px; }
+.stats { display:flex; gap:20px; margin-bottom:30px; }
+.stat-card { flex:1; background:white; padding:20px; border-radius:12px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+.stat-number { font-size:36px; font-weight:bold; color:#3b82f6; }
+.stat-label { color:#666; font-size:14px; }
+.row { display:flex; gap:20px; margin-bottom:20px; flex-wrap:wrap; }
+.card { flex:1; min-width:300px; background:white; padding:20px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+.card h3 { margin-bottom:15px; color:#1a1a2e; }
+table { width:100%; border-collapse:collapse; }
+th, td { padding:10px; text-align:left; border-bottom:1px solid #ddd; }
+th { background:#f8f9fa; }
+.chart-container { height:300px; }
+</style>
+</head>
+<body>
+
+<h1>📊 租客流向看板</h1>
+<p class="subtitle">基于真实租客数据 | 更新时间：2026年6月</p>
+
+<div class="stats">
+    <div class="stat-card"><div class="stat-label">📅 流失+续租总数</div><div class="stat-number">4398</div></div>
+    <div class="stat-card"><div class="stat-label">📈 续租率</div><div class="stat-number">38.8%</div></div>
+    <div class="stat-card"><div class="stat-label">📉 流失率</div><div class="stat-number">61.2%</div></div>
+</div>
+
+<div class="row">
+    <div class="card"><h3>📋 流失原因分布（饼图）</h3><div class="chart-container"><canvas id="pieChart"></canvas></div></div>
+    <div class="card"><h3>📊 流失原因 TOP 8（柱状图）</h3><div class="chart-container"><canvas id="barChart"></canvas></div></div>
+</div>
+
+<div class="card">
+    <h3>📋 流失原因详细统计</h3>
+    <table><thead><tr><th>流失原因</th><th>人数</th><th>占比</th></tr></thead><tbody><tr><td>居住环境问题</td><td>478</td><td>17.8%</td></tr>
+<tr><td>屋内设施问题</td><td>366</td><td>13.6%</td></tr>
+<tr><td>管家服务问题</td><td>280</td><td>10.4%</td></tr>
+<tr><td>综合体验好</td><td>278</td><td>10.3%</td></tr>
+<tr><td>规则问题</td><td>178</td><td>6.6%</td></tr>
+<tr><td>管家服务好</td><td>148</td><td>5.5%</td></tr>
+<tr><td>费用问题</td><td>145</td><td>5.4%</td></tr>
+<tr><td>整体体验问题</td><td>100</td><td>3.7%</td></tr>
+<tr><td>租金问题</td><td>97</td><td>3.6%</td></tr>
+<tr><td>中介服务问题</td><td>96</td><td>3.6%</td></tr>
+<tr><td>维修服务问题</td><td>81</td><td>3.0%</td></tr>
+<tr><td>信任品牌</td><td>58</td><td>2.2%</td></tr>
+<tr><td>居住安全问题</td><td>55</td><td>2.0%</td></tr>
+<tr><td>房源供给/信息呈现</td><td>43</td><td>1.6%</td></tr>
+<tr><td>室内改善</td><td>33</td><td>1.2%</td></tr>
+<tr><td>维修服务好</td><td>32</td><td>1.2%</td></tr>
+<tr><td>租金/费用优化</td><td>31</td><td>1.2%</td></tr>
+<tr><td>居住环境好</td><td>25</td><td>0.9%</td></tr>
+<tr><td>规则改善</td><td>25</td><td>0.9%</td></tr>
+<tr><td>中介服务好</td><td>23</td><td>0.9%</td></tr>
+<tr><td>管家服务提升</td><td>23</td><td>0.9%</td></tr>
+<tr><td>认可租金/费用</td><td>18</td><td>0.7%</td></tr>
+<tr><td>综合体验提升</td><td>16</td><td>0.6%</td></tr>
+<tr><td>保洁服务问题</td><td>10</td><td>0.4%</td></tr>
+<tr><td>租客权益保障</td><td>8</td><td>0.3%</td></tr>
+<tr><td>屋内设施好</td><td>7</td><td>0.3%</td></tr>
+<tr><td>租客</td><td>7</td><td>0.3%</td></tr>
+<tr><td>室外改善</td><td>6</td><td>0.2%</td></tr>
+<tr><td>维修服务提升</td><td>5</td><td>0.2%</td></tr>
+<tr><td>保洁服务好</td><td>3</td><td>0.1%</td></tr>
+<tr><td>中介服务提升</td><td>2</td><td>0.1%</td></tr>
+<tr><td>保洁服务提升</td><td>2</td><td>0.1%</td></tr>
+<tr><td>价格</td><td>1</td><td>0.0%</td></tr>
+<tr><td>房屋格局问题</td><td>1</td><td>0.0%</td></tr>
+<tr><td>租赁服务</td><td>1</td><td>0.0%</td></tr>
+<tr><td>服务</td><td>1</td><td>0.0%</td></tr>
+<tr><td>居住体验</td><td>1</td><td>0.0%</td></tr>
+<tr><td>租客抱怨/愤怒</td><td>1</td><td>0.0%</td></tr>
+<tr><td>装修好</td><td>1</td><td>0.0%</td></tr>
+<tr><td>房屋维护问题</td><td>1</td><td>0.0%</td></tr>
+<tr><td>服务质量</td><td>1</td><td>0.0%</td></tr>
+<tr><td>找房</td><td>1</td><td>0.0%</td></tr>
+<tr><td>产品体验</td><td>1</td><td>0.0%</td></tr>
+</tbody></table>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const colors = ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#14b8a6','#f97316','#6b7280'];
+    const pieLabels = ['居住环境问题', '屋内设施问题', '管家服务问题', '综合体验好', '规则问题', '管家服务好', '费用问题', '整体体验问题', '其他'];
+    const pieData = [478, 366, 280, 278, 178, 148, 145, 100, 717];
+    const barLabels = ['居住环境问题', '屋内设施问题', '管家服务问题', '综合体验好', '规则问题', '管家服务好', '费用问题', '整体体验问题'];
+    const barData = [478, 366, 280, 278, 178, 148, 145, 100];
+
+    new Chart(document.getElementById('pieChart'), {
+        type: 'pie',
+        data: { labels: pieLabels, datasets: [{ data: pieData, backgroundColor: colors }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+    });
+
+    new Chart(document.getElementById('barChart'), {
+        type: 'bar',
+        data: { labels: barLabels, datasets: [{ label: '流失人数', data: barData, backgroundColor: '#3b82f6', borderRadius: 6 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+    });
+});
+</script>
+</body>
+</html>
+
